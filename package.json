@@ -34,7 +34,7 @@
     "@playwright/test": "1.56.0",
     "@types/node": "^22.10.0",
     "allure-commandline": "^2.32.0",
-    "allure-playwright": "^3.0.0",
+    "allure-playwright": "~3.11.0",
     "csv-parse": "^5.6.0",
     "dotenv": "^16.4.7",
     "playwright": "1.56.0",

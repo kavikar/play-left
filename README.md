@@ -193,7 +193,7 @@ Stated plainly, because a framework README that hides its gaps is worth less tha
 
 - Only the `test` environment is configured; `qa`/`uat` were designed for but are not wired
 - Chromium only
-- `@playwright/test` is pinned exactly, not floated — the browser build and the library version have to agree
+- `@playwright/test` is pinned exactly, not floated — the browser build and the library version have to agree, and `allure-playwright` is pinned to the range that matches it
 - Native mobile is out of scope — see [`chidori`](https://github.com/kavikar/chidori) for the Maestro and Appium side
 - No OTP provider is built in; MFA accounts need manual completion during `auth:setup`
 - Anti-bot challenges may require interaction, which is why `auth:setup` is headed

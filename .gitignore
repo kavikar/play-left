@@ -39,3 +39,6 @@ allure-report/
 .idea/
 .vscode/*
 !.vscode/extensions.json
+
+# Claude Code local overrides (keep .claude/settings.json shared)
+.claude/settings.local.json
