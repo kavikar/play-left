@@ -194,7 +194,7 @@ Stated plainly, because a framework README that hides its gaps is worth less tha
 - Only the `test` environment is configured; `qa`/`uat` were designed for but are not wired
 - Chromium only
 - `@playwright/test` is pinned exactly, not floated — the browser build and the library version have to agree, and `allure-playwright` is pinned to the range that matches it
-- Native mobile is out of scope — see [`chidori`](https://github.com/kavikar/chidori) for the Maestro and Appium side
+- Native mobile is out of scope — see [`shuriken`](https://github.com/kavikar/shuriken) for the Maestro and Appium side
 - No OTP provider is built in; MFA accounts need manual completion during `auth:setup`
 - Anti-bot challenges may require interaction, which is why `auth:setup` is headed
 - Wallet payments can be selected for UI validation but not submitted
@@ -202,7 +202,7 @@ Stated plainly, because a framework README that hides its gaps is worth less tha
 
 ## Related
 
-[**chidori**](https://github.com/kavikar/chidori) — the wider QA platform this framework plugs into: Maestro and Appium mobile automation, Jira/Xray test-management automation, API automation, menu validation tooling, and the CI/CD orchestration layer.
+[**shuriken**](https://github.com/kavikar/shuriken) — the wider QA platform this framework plugs into: Maestro and Appium mobile automation, Jira/Xray test-management automation, API automation, menu validation tooling, and the CI/CD orchestration layer.
 
 ## License
 
