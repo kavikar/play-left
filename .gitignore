@@ -1,0 +1,41 @@
+# Dependencies
+node_modules/
+
+# Build output
+dist/
+*.tsbuildinfo
+
+# Secrets and local environment
+.env
+.env.local
+*.local.json
+!*.local.example.json
+
+# Authentication storage state — never commit session cookies
+.auth/
+
+# Runtime knowledge state (TTL-based, regenerated on demand)
+knowledge/state/*
+!knowledge/state/.gitkeep
+
+# Generated output — review material, not source.
+# Re-include directories explicitly: git will not descend into an excluded
+# directory, so a bare `output/**` would hide the .gitkeep files too.
+output/**
+!output/**/
+!output/**/.gitkeep
+
+# Reports and evidence
+reports/**
+!reports/**/
+!reports/**/.gitkeep
+playwright-report/
+test-results/
+allure-results/
+allure-report/
+
+# Editor / OS
+.DS_Store
+.idea/
+.vscode/*
+!.vscode/extensions.json

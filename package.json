@@ -1,0 +1,41 @@
+{
+  "name": "play-left",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Multi-brand Playwright end-to-end framework with a registry-driven brand model, typed fixtures, and honest coverage classification.",
+  "license": "MIT",
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "scripts": {
+    "test": "playwright test",
+    "test:parallel": "playwright test --fully-parallel --workers=4",
+    "test:brand-one": "playwright test --project=brand-one-chromium",
+    "test:brand-one:parallel": "playwright test --project=brand-one-chromium --fully-parallel --workers=4",
+    "test:smoke": "playwright test --grep @smoke",
+    "test:headed": "playwright test --headed",
+    "auth:setup": "tsx src/auth/auth.setup.ts",
+    "extract": "tsx src/tools/extract-cli.ts",
+    "assert:gen": "tsx src/tools/assertion-cli.ts",
+    "diff:brands": "tsx src/tools/cross-brand-diff-cli.ts",
+    "coverage": "tsx src/coverage/coverage-cli.ts",
+    "regression:manifest": "tsx src/regression/regression-manifest-cli.ts",
+    "report": "playwright show-report",
+    "report:allure:generate": "allure generate allure-results --clean -o allure-report",
+    "report:allure:open": "allure open allure-report",
+    "report:allure": "npm run report:allure:generate && npm run report:allure:open",
+    "typecheck": "tsc --noEmit"
+  },
+  "devDependencies": {
+    "@axe-core/playwright": "^4.10.0",
+    "@playwright/test": "^1.49.0",
+    "@types/node": "^22.10.0",
+    "allure-commandline": "^2.32.0",
+    "allure-playwright": "^3.0.0",
+    "csv-parse": "^5.6.0",
+    "dotenv": "^16.4.7",
+    "playwright": "^1.49.0",
+    "tsx": "^4.19.2",
+    "typescript": "^5.7.2"
+  }
+}

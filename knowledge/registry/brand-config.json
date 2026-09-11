@@ -1,0 +1,148 @@
+{
+  "version": 1,
+  "updated": "2026-09-11",
+  "owner": "qa-engineering",
+  "envs": ["test"],
+  "brands": {
+    "brand-one": {
+      "id": "brand-one",
+      "label": "Brand One",
+      "channel": "WEB",
+      "testManagementBrandId": 10001,
+      "hosts": {
+        "test": "https://brand-one.example.test"
+      },
+      "testData": {
+        "storeId": "1001",
+        "zip": "00001",
+        "address": "100 Example Street",
+        "cityState": "Example City, EX",
+        "deliveryAddress": "200 Sample Avenue"
+      },
+      "loyalty": {
+        "program": "Brand One Rewards",
+        "tiers": ["Starter", "Plus", "Premium"]
+      },
+      "fulfillment": [
+        "Pickup",
+        "Delivery",
+        "Counter",
+        "Curbside",
+        "Express",
+        "Drive-through"
+      ],
+      "featureFlags": {
+        "checkout_order": {
+          "providerId": "flag-10001",
+          "type": "json"
+        },
+        "consent_banner": {
+          "providerId": "flag-10002",
+          "type": "boolean",
+          "default": false
+        }
+      },
+      "pomOverrides": ["loyalty", "storeSelector"]
+    },
+    "brand-two": {
+      "id": "brand-two",
+      "label": "Brand Two",
+      "channel": "WEB",
+      "testManagementBrandId": 10002,
+      "hosts": {
+        "test": "https://brand-two.example.test"
+      },
+      "testData": {
+        "storeId": "1002",
+        "zip": "00002",
+        "address": "101 Example Street",
+        "cityState": "Example City, EX",
+        "deliveryAddress": "201 Sample Avenue"
+      },
+      "loyalty": {
+        "program": "Brand Two Rewards",
+        "tiers": ["Basic", "Plus"]
+      },
+      "fulfillment": ["Carryout", "Dine In", "Drive-through", "Delivery"],
+      "featureFlags": {
+        "checkout_order": {
+          "providerId": "flag-20001",
+          "type": "json"
+        }
+      },
+      "pomOverrides": ["loyalty", "storeSelector"],
+      "notes": "test-id coverage is intentionally incomplete; store selection may require additional configuration"
+    },
+    "brand-three": {
+      "id": "brand-three",
+      "label": "Brand Three",
+      "channel": "WEB",
+      "testManagementBrandId": 10003,
+      "hosts": {
+        "test": "https://brand-three.example.test"
+      },
+      "testData": {
+        "storeId": "1003",
+        "zip": "00003",
+        "address": "102 Example Street",
+        "cityState": "Example City, EX",
+        "deliveryAddress": "202 Sample Avenue"
+      },
+      "loyalty": {
+        "program": "Brand Three Rewards",
+        "tiers": ["Basic", "Plus"]
+      },
+      "fulfillment": ["Pickup", "Delivery", "Express", "Full Service"],
+      "featureFlags": {
+        "checkout_order": {
+          "providerId": "flag-30001",
+          "type": "json"
+        }
+      },
+      "pomOverrides": ["loyalty", "storeSelector"]
+    },
+    "brand-four": {
+      "id": "brand-four",
+      "label": "Brand Four",
+      "channel": "WEB",
+      "testManagementBrandId": 10004,
+      "hosts": {
+        "test": "https://brand-four.example.test"
+      },
+      "testData": {
+        "storeId": "1004",
+        "zip": "00004",
+        "address": "103 Example Street",
+        "cityState": "Example City, EX",
+        "deliveryAddress": "203 Sample Avenue"
+      },
+      "loyalty": {
+        "program": "Brand Four Rewards",
+        "tiers": ["Basic", "Premium"]
+      },
+      "fulfillment": [
+        "Pickup",
+        "Delivery",
+        "Curbside",
+        "Walk-up",
+        "Drive-through"
+      ],
+      "featureFlags": {
+        "checkout_order": {
+          "providerId": "flag-40001",
+          "type": "json"
+        },
+        "signup_banner": {
+          "providerId": "flag-40002",
+          "type": "boolean"
+        },
+        "consent_banner": {
+          "providerId": "flag-40003",
+          "type": "boolean",
+          "default": false
+        }
+      },
+      "pomOverrides": ["loyalty", "storeSelector"]
+    }
+  }
+}

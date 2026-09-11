@@ -1,0 +1,19 @@
+{
+  "_comment": "Copy to payment-cards.local.json (git-ignored) and replace with test card values issued by your payment provider's sandbox. Never commit real card data.",
+  "visa": [
+    {
+      "number": "0000000000000000",
+      "expiry": "12/30",
+      "cvv": "000",
+      "zip": "00000"
+    }
+  ],
+  "master": [
+    {
+      "number": "0000000000000000",
+      "expiry": "12/30",
+      "cvv": "000",
+      "zip": "00000"
+    }
+  ]
+}

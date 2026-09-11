@@ -1,0 +1,9 @@
+{
+  "_comment": "Copy to gift-cards.local.json (git-ignored). Gift cards must be active and funded in the target environment for payment tests to pass.",
+  "cards": [
+    {
+      "number": "0000000000000000",
+      "pin": "0000"
+    }
+  ]
+}
