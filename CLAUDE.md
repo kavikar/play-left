@@ -27,10 +27,23 @@ brands, placeholder hosts, no real data anywhere.
 - Brand differences are small page-object overrides, not forked hierarchies
 - Strict TypeScript, CommonJS, `npm run typecheck` must pass
 
+## The demo brand
+
+`brand-demo` is the only brand with a real host: `demo-app/`, a dependency-free
+storefront started by Playwright's `webServer`. It is what makes CI meaningful.
+
+- Keep `demo-app/` dependency-free and build-step-free.
+- Add to it only what a spec genuinely needs — it is a test target, not a product.
+- A brand with `runnable !== true` skips rather than fails. Do not "fix" a
+  skipped placeholder brand by pointing it at the demo app.
+
 ## Verify before pushing
 
 ```bash
 npm run typecheck
-npx playwright test --project=config
-npx playwright test --list
+npm run test:config          # contracts, no browser
+npx playwright test          # expect: 27 passed, 4 skipped, 0 failed
 ```
+
+The four skips are the placeholder brands. A failure there means the runnable
+guard broke, not that the brands need hosts.

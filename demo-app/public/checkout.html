@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Checkout · Demo Storefront</title><link rel="stylesheet" href="/styles.css"></head>
+<body data-page="checkout">
+<header>
+  <span class="brand">Demo Storefront</span>
+  <nav>
+    <a href="/inventory.html" data-test="nav-inventory">Products</a>
+    <a href="/cart.html" data-test="cart-link">Cart <span class="badge" data-test="cart-count" hidden>0</span></a>
+    <button class="secondary" data-test="logout">Sign out</button>
+  </nav>
+</header>
+<main>
+<h1 data-test="page-title">Checkout</h1>
+  <p class="error" data-test="error" hidden></p>
+  <form data-test="checkout-form" style="max-width:380px">
+    <label><span>First name</span><input data-test="first-name" name="firstName"></label>
+    <label><span>Last name</span><input data-test="last-name" name="lastName"></label>
+    <label><span>Postal code</span><input data-test="postal-code" name="postalCode"></label>
+    <div class="totals">
+      <div><span>Subtotal</span><span data-test="subtotal">$0.00</span></div>
+      <div><span>Tax</span><span data-test="tax">$0.00</span></div>
+      <div class="grand"><span>Total</span><span data-test="total">$0.00</span></div>
+    </div>
+    <div class="actions"><button type="submit" data-test="finish">Place order</button></div>
+  </form>
+</main>
+<div id="consent-banner">
+  <span class="muted">We use cookies to make the demo feel realistic.</span>
+  <button id="consent-banner-button-primary">Accept all</button>
+</div>
+<script src="/app.js"></script>
+</body></html>

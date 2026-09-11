@@ -10,7 +10,20 @@ export const BRAND_IDS: readonly BrandId[] = [
   'brand-two',
   'brand-three',
   'brand-four',
+  'brand-demo',
 ] as const;
+
+/**
+ * Brands whose host is a real, reachable application.
+ *
+ * Browser specs can only run against these. The rest are placeholder hosts
+ * that describe a shape without serving anything, which is why CI runs the
+ * runnable set and lists the others.
+ */
+export function runnableBrands(): BrandId[] {
+  const registry = loadRegistry();
+  return BRAND_IDS.filter((id) => registry.brands[id]?.runnable === true);
+}
 
 const REGISTRY_PATH = resolve(__dirname, '..', 'knowledge', 'registry', 'brand-config.json');
 

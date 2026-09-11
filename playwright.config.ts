@@ -69,7 +69,27 @@ export default defineConfig<BrandOptions>({
     ],
   ],
 
+  /**
+   * Start the bundled demo storefront for the runnable brand.
+   *
+   * A demo target inside the repo, rather than a public practice site, keeps
+   * CI green when a third party changes their markup — and removes the
+   * network from the critical path entirely.
+   */
+  webServer: {
+    command: 'node demo-app/server.js',
+    url: 'http://127.0.0.1:4173',
+    reuseExistingServer: !isCI,
+    stdout: 'ignore',
+    stderr: 'pipe',
+    timeout: 30_000,
+  },
+
   use: {
+    // The demo storefront (and most practice targets) use data-test rather
+    // than data-testid, so getByTestId is pointed at it.
+    testIdAttribute: 'data-test',
+
     // Local runs stay lean: traces and video are the slowest part of a suite and
     // a failure screenshot is usually enough when the app is on your own machine.
     // CI gets the full evidence set, because there is no second chance to look.

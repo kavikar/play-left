@@ -1,5 +1,7 @@
 # play-left
 
+[![CI](https://github.com/kavikar/play-left/actions/workflows/ci.yml/badge.svg)](https://github.com/kavikar/play-left/actions/workflows/ci.yml)
+
 A multi-brand Playwright end-to-end framework built around one idea: **brand facts live in a registry, never in a spec.**
 
 Four brands share ~70% of their web experience and differ in the rest. The naive answers are to fork the framework per brand (four copies to maintain) or to branch on brand inside every spec (unreadable within a month). This does neither — brand is a typed Playwright project option, brand data comes from a versioned JSON registry, and brand differences are small page-object overrides.
@@ -23,6 +25,8 @@ The decisions worth looking at:
 | Unavailable store / auth failure / consent failure → **blocked**, not failed | Calling an environment problem a product defect burns reviewer trust faster than anything else |
 | Generated page objects are review material, not source | The extractor gets you 80% of a POM; committing the other 20% unread is how brittle selectors get in |
 | Local runs: no trace, no video | Traces are the slowest part of a suite. On your own machine a failure screenshot is enough; CI gets the full evidence set because there is no second chance to look |
+| A brand with no running host **skips**, it does not fail | The framework's own "blocked is not failed" rule, applied to itself. A red suite everyone learns to ignore is worse than an honest skip with a reason |
+| The demo target ships **inside** the repo | A demo that points at a public practice site goes red the day that site changes a selector. CI has no network dependency at all |
 
 ---
 
@@ -39,13 +43,19 @@ knowledge/registry/brand-config.json   ← single source of truth for brand fact
             └──────────────► fixtures/brand.fixture.ts
                                     │
                                     ▼
-                              brandConfig fixture
+                       brandConfig · flags · runnableGuard
                                     │
                                     ▼
                          tests/<brand>/*.spec.ts     ← zero hardcoded brand data
 ```
 
 A spec never knows a store ID, a ZIP, a hostname, or an address. It asks `brandConfig`.
+
+Adding a brand is a registry edit and a `BrandId` union member — no new config
+file, no new fixture, no forked page-object tree. `brand-demo` is the proof:
+it carries no loyalty program and no fulfillment modes because it genuinely has
+neither, and the schema models that rather than forcing every brand into one
+shape.
 
 ---
 
@@ -67,6 +77,7 @@ A spec never knows a store ID, a ZIP, a hostname, or an address. It asks `brandC
 | `src/regression/` | Executable regression manifest |
 | `tests/<brand>/` | Specs, one project per brand |
 | `tests/config/` | Contract tests for the registry and execution settings — no browser |
+| `demo-app/` | A dependency-free storefront the demo brand runs against, started by Playwright `webServer` |
 | `output/` | Generated review material (git-ignored) |
 
 ---
@@ -87,17 +98,25 @@ Verify the install without touching a browser:
 
 ```bash
 npm run typecheck
-npx playwright test --project=config     # registry + execution-settings contracts
+npm run test:config                      # registry + execution-settings contracts
 ```
 
-Then:
+Then run the real thing. Playwright starts the bundled demo storefront itself,
+so this needs no network and no configuration:
+
+```bash
+npm run test:demo                        # 18 specs against demo-app/
+npx playwright test                      # everything; placeholder brands skip
+```
+
+Other useful invocations:
 
 ```bash
 npx playwright test --list               # what would run
-npm run test:brand-one
 BRAND=brand-two npx playwright test      # restrict which projects are defined at all
 HEADED=true npx playwright test          # headed debugging
 WORKERS=8 npx playwright test
+npm run demo:serve                       # browse the demo storefront yourself
 ```
 
 Authenticated specs need a saved session first:
@@ -150,31 +169,36 @@ Test-id coverage across the four brands is deliberately inconsistent (it mirrors
 
 Stated plainly, because a framework README that hides its gaps is worth less than one that doesn't.
 
-**Built and verified**
-- Registry, typed loader, brand narrowing — with contract tests
-- Typed fixtures: `brand` option, `brandConfig`, `flags` with TTL enforcement, async consent handler
-- Strict execution settings — with tests covering every rejection path
-- Playwright config: per-brand projects, registry-driven `baseURL`, conditional storage state, CI/local evidence split
+**Built and verified** — `27 passed, 4 skipped` on every push
+
+- Registry, typed loader, brand narrowing, with contract tests
+- Typed fixtures: `brand` option, `brandConfig`, `flags` with TTL enforcement, async consent handler, runnable-host guard
+- Strict execution settings, with tests covering every rejection path
+- Playwright config: per-brand projects, registry-driven `baseURL`, conditional storage state, CI/local evidence split, `data-test` test-id attribute
 - Payment and gift card providers with clear failure messages
-- `BaseHomePage` + a Brand One override, smoke specs for Brand One and Brand Two
+- **A working demo brand**: `demo-app/` is a dependency-free storefront (sign in → browse → cart → checkout → confirmation) that Playwright starts itself, with 18 specs covering authentication, sorting, cart arithmetic, validation and the consent race
+- `BaseHomePage` + a Brand One override; smoke specs for Brand One and Brand Two
 - Headed one-time auth setup
 
+**Why four brands skip.** `brand-one`..`brand-four` point at placeholder hosts that serve nothing. Their specs skip with an explicit reason rather than failing, because an unrunnable host is a configuration fact and not a product defect. Point one at a real application and set `"runnable": true` in the registry, and its specs run.
+
 **Roadmap** — specified in detail, not yet implemented
+
 - Selector extractor, POM generator, assertion generator, cross-brand diff
 - Coverage classifier and regression manifest
-- Guest checkout flow (pickup/delivery × ASAP/scheduled × card/gift-card/wallet)
+- Full guest checkout flow (pickup/delivery × ASAP/scheduled × card/gift-card/wallet)
 - Full Brand One page-object set; Brand Three and Brand Four specs
 
 **Constraints that will not change soon**
+
 - Only the `test` environment is configured; `qa`/`uat` were designed for but are not wired
 - Chromium only
+- `@playwright/test` is pinned exactly, not floated — the browser build and the library version have to agree
 - Native mobile is out of scope — see [`chidori`](https://github.com/kavikar/chidori) for the Maestro and Appium side
 - No OTP provider is built in; MFA accounts need manual completion during `auth:setup`
 - Anti-bot challenges may require interaction, which is why `auth:setup` is headed
-- Wallet payments (Apple Pay / Google Pay) can be selected for UI validation but not submitted
+- Wallet payments can be selected for UI validation but not submitted
 - Visual baselines are not committed
-
----
 
 ## Related
 

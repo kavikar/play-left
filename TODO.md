@@ -3,6 +3,15 @@
 Ordered by what unblocks the most downstream work. Each item is fully specified
 in the build prompt this framework was extracted from.
 
+## Done
+- [x] Registry, typed loader, brand narrowing, contract tests
+- [x] Typed fixtures: brand option, brandConfig, flags with TTL, consent handler
+- [x] Strict execution settings with full rejection coverage
+- [x] Payment / gift card providers
+- [x] `demo-app/` storefront + `brand-demo` + 18 passing browser specs
+- [x] Runnable-host guard: placeholder brands skip with a reason
+- [x] GitHub Actions CI
+
 ## 1. Selector tooling
 - [ ] `src/tools/dom-extract.ts` — in-page DOM inspection
 - [ ] `src/tools/selector-extractor.ts` — rank candidates by test-id → role+name → label → CSS → XPath, record visibility and uniqueness
@@ -34,6 +43,12 @@ in the build prompt this framework was extracted from.
 - [ ] `src/knowledge/cache.ts` — `getFresh()` / `writeCache()`, cache-first with explicit staleness
 - [ ] `src/tools/menu-catalog-cli.ts`, `src/tools/rewards-catalog-cli.ts`
 
-## 7. CI
-- [ ] Workflow running `typecheck` + the `config` project on every push
+## 7. CI and reporting
+- [x] Workflow running typecheck, contract tests and browser tests on every push
 - [ ] Allure history retention across runs
+- [ ] Publish the Playwright HTML report to GitHub Pages per run
+
+## 8. Optional live target
+- [ ] `brand-saucedemo` registry entry + page objects for https://www.saucedemo.com,
+      opt-in only. Deliberately kept out of CI: a third party changing their
+      markup should never turn this repo red.

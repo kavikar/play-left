@@ -1,8 +1,10 @@
 {
-  "version": 1,
+  "version": 2,
   "updated": "2026-09-11",
   "owner": "qa-engineering",
-  "envs": ["test"],
+  "envs": [
+    "test"
+  ],
   "brands": {
     "brand-one": {
       "id": "brand-one",
@@ -21,7 +23,11 @@
       },
       "loyalty": {
         "program": "Brand One Rewards",
-        "tiers": ["Starter", "Plus", "Premium"]
+        "tiers": [
+          "Starter",
+          "Plus",
+          "Premium"
+        ]
       },
       "fulfillment": [
         "Pickup",
@@ -42,7 +48,10 @@
           "default": false
         }
       },
-      "pomOverrides": ["loyalty", "storeSelector"]
+      "pomOverrides": [
+        "loyalty",
+        "storeSelector"
+      ]
     },
     "brand-two": {
       "id": "brand-two",
@@ -61,16 +70,27 @@
       },
       "loyalty": {
         "program": "Brand Two Rewards",
-        "tiers": ["Basic", "Plus"]
+        "tiers": [
+          "Basic",
+          "Plus"
+        ]
       },
-      "fulfillment": ["Carryout", "Dine In", "Drive-through", "Delivery"],
+      "fulfillment": [
+        "Carryout",
+        "Dine In",
+        "Drive-through",
+        "Delivery"
+      ],
       "featureFlags": {
         "checkout_order": {
           "providerId": "flag-20001",
           "type": "json"
         }
       },
-      "pomOverrides": ["loyalty", "storeSelector"],
+      "pomOverrides": [
+        "loyalty",
+        "storeSelector"
+      ],
       "notes": "test-id coverage is intentionally incomplete; store selection may require additional configuration"
     },
     "brand-three": {
@@ -90,16 +110,27 @@
       },
       "loyalty": {
         "program": "Brand Three Rewards",
-        "tiers": ["Basic", "Plus"]
+        "tiers": [
+          "Basic",
+          "Plus"
+        ]
       },
-      "fulfillment": ["Pickup", "Delivery", "Express", "Full Service"],
+      "fulfillment": [
+        "Pickup",
+        "Delivery",
+        "Express",
+        "Full Service"
+      ],
       "featureFlags": {
         "checkout_order": {
           "providerId": "flag-30001",
           "type": "json"
         }
       },
-      "pomOverrides": ["loyalty", "storeSelector"]
+      "pomOverrides": [
+        "loyalty",
+        "storeSelector"
+      ]
     },
     "brand-four": {
       "id": "brand-four",
@@ -118,7 +149,10 @@
       },
       "loyalty": {
         "program": "Brand Four Rewards",
-        "tiers": ["Basic", "Premium"]
+        "tiers": [
+          "Basic",
+          "Premium"
+        ]
       },
       "fulfillment": [
         "Pickup",
@@ -142,7 +176,26 @@
           "default": false
         }
       },
-      "pomOverrides": ["loyalty", "storeSelector"]
+      "pomOverrides": [
+        "loyalty",
+        "storeSelector"
+      ]
+    },
+    "brand-demo": {
+      "id": "brand-demo",
+      "label": "Demo Storefront",
+      "channel": "WEB",
+      "testManagementBrandId": 10099,
+      "hosts": {
+        "test": "http://127.0.0.1:4173"
+      },
+      "testData": {
+        "storeId": null
+      },
+      "featureFlags": {},
+      "pomOverrides": [],
+      "runnable": true,
+      "notes": "The only brand backed by a real, running application: the storefront under demo-app/, started by Playwright webServer. It carries no loyalty or fulfillment because it has neither \u2014 proving the registry models what a brand actually has rather than forcing every brand into one shape."
     }
   }
 }

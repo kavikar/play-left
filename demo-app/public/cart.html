@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Cart · Demo Storefront</title><link rel="stylesheet" href="/styles.css"></head>
+<body data-page="cart">
+<header>
+  <span class="brand">Demo Storefront</span>
+  <nav>
+    <a href="/inventory.html" data-test="nav-inventory">Products</a>
+    <a href="/cart.html" data-test="cart-link">Cart <span class="badge" data-test="cart-count" hidden>0</span></a>
+    <button class="secondary" data-test="logout">Sign out</button>
+  </nav>
+</header>
+<main>
+<h1 data-test="page-title">Your cart</h1>
+  <p class="muted" data-test="cart-empty" hidden>Your cart is empty.</p>
+  <div data-test="cart-list"></div>
+  <div class="actions">
+    <a class="btn" href="/inventory.html" data-test="continue-shopping">Continue shopping</a>
+    <button data-test="checkout">Checkout</button>
+  </div>
+</main>
+<div id="consent-banner">
+  <span class="muted">We use cookies to make the demo feel realistic.</span>
+  <button id="consent-banner-button-primary">Accept all</button>
+</div>
+<script src="/app.js"></script>
+</body></html>

@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Sign in · Demo Storefront</title><link rel="stylesheet" href="/styles.css"></head>
+<body data-page="login">
+
+<main>
+<h1 data-test="page-title">Sign in</h1>
+  <p class="error" data-test="error" hidden></p>
+  <form data-test="login-form" style="max-width:340px">
+    <label><span>Username</span><input data-test="username" name="username" autocomplete="username"></label>
+    <label><span>Password</span><input data-test="password" name="password" type="password" autocomplete="current-password"></label>
+    <button type="submit" data-test="login-button">Sign in</button>
+  </form>
+  <p class="muted" style="margin-top:22px">Demo users: <code>standard_user</code>, <code>locked_out_user</code> · password <code>demo_password</code></p>
+</main>
+<div id="consent-banner">
+  <span class="muted">We use cookies to make the demo feel realistic.</span>
+  <button id="consent-banner-button-primary">Accept all</button>
+</div>
+<script src="/app.js"></script>
+</body></html>
