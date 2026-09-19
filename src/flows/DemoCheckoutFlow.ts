@@ -1,4 +1,4 @@
-import type { Page, TestInfo } from '@playwright/test';
+import { test, type Page, type TestInfo } from '@playwright/test';
 
 import type { BrandConfig } from '../../brands';
 import {
@@ -54,28 +54,50 @@ export async function runDemoCheckout(
   const credentials = getDemoCredentials();
 
   const login = new DemoLoginPage(page);
-  await login.goto();
-  await login.signInAs(credentials.username, credentials.password);
+  await test.step(
+    'Sign in',
+    async () => {
+      await login.goto();
+      await login.signInAs(credentials.username, credentials.password);
+    },
+    { subtitle: credentials.username, params: { username: credentials.username } },
+  );
 
   const inventory = new DemoInventoryPage(page);
-  for (const id of productIds) {
-    await inventory.addToCart(id);
-  }
-  await inventory.openCart();
+  await test.step(
+    'Add items to cart',
+    async () => {
+      for (const id of productIds) {
+        await inventory.addToCart(id);
+      }
+      await inventory.openCart();
+    },
+    { subtitle: productIds.join(', '), params: { productIds } },
+  );
 
   const cart = new DemoCartPage(page);
   await cart.proceedToCheckout();
 
   const checkout = new DemoCheckoutPage(page);
-  await checkout.fillContact(contact);
+  await test.step(
+    'Fill contact details',
+    async () => {
+      await checkout.fillContact(contact);
+    },
+    { params: { ...contact } },
+  );
 
   if (!placeOrder) {
     return { checkout };
   }
 
-  await checkout.placeOrder();
-
-  const confirmation = await new DemoConfirmationPage(page).details();
+  const confirmation = await test.step(
+    'Place order',
+    async () => {
+      await checkout.placeOrder();
+      return new DemoConfirmationPage(page).details();
+    },
+  );
 
   if (testInfo) {
     // Evidence, preserved on the test rather than only in a log line.
